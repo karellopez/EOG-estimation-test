@@ -70,7 +70,10 @@ def score_ica_component(ic_signal, ic_topo):
 # ===============================
 
 for fif_file in DATA_DIR.rglob("*_meg.fif"):
-
+    if "derivatives" in fif_file.parts or ".git" in fif_file.parts:
+        continue
+    if not fif_file.is_file():
+        continue
     subj = fif_file.parents[1].name
     out_subj = OUT_DIR / subj
     out_subj.mkdir(exist_ok=True)
